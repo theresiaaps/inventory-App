@@ -22,7 +22,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 /**
- * Database class with a singleton Instance object.
+ * Kelas `InventoryDatabase` yang menyediakan instance database Room untuk aplikasi.
+ * Digunakan untuk mengakses data `Item` melalui `ItemDao`.
  */
 @Database(entities = [Item::class], version = 1, exportSchema = false)
 abstract class InventoryDatabase : RoomDatabase() {
@@ -32,7 +33,10 @@ abstract class InventoryDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var Instance: InventoryDatabase? = null
-
+        /**
+         * Mengambil instance database, membuat instance baru jika belum ada.
+         * Menggunakan `synchronized` untuk memastikan hanya satu instance yang dibuat.
+         */
         fun getDatabase(context: Context): InventoryDatabase {
             // if the Instance is not null, return it, otherwise create a new database instance.
             return Instance ?: synchronized(this) {

@@ -29,21 +29,34 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 interface ItemDao {
-
+    /**
+     * Fungsi untuk mengambil semua data item dari database.
+     * Mengembalikan Flow yang dapat diamati dan mengurutkan item berdasarkan nama secara ascending.
+     */
     @Query("SELECT * from items ORDER BY name ASC")
     fun getAllItems(): Flow<List<Item>>
 
     @Query("SELECT * from items WHERE id = :id")
     fun getItem(id: Int): Flow<Item>
 
-    // Specify the conflict strategy as IGNORE, when the user tries to add an
-    // existing Item into the database Room ignores the conflict.
+    /**
+     * Fungsi untuk menyisipkan data item ke dalam database.
+     * Jika ada konflik, item yang sama akan diabaikan (ignore).
+     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(item: Item)
 
+    /**
+     * Fungsi untuk memperbarui data item yang sudah ada di database.
+     * Data item akan digantikan dengan nilai baru jika ada perubahan.
+     */
     @Update
     suspend fun update(item: Item)
 
+    /**
+     * Fungsi untuk menghapus item dari database.
+     * Menghapus item sesuai dengan yang diberikan sebagai parameter.
+     */
     @Delete
     suspend fun delete(item: Item)
 }

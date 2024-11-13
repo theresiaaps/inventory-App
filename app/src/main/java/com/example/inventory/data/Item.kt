@@ -20,7 +20,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 /**
- * Entity data class represents a single row in the database.
+ * Kelas data `Item` yang merepresentasikan satu baris data dalam tabel `items` di database.
+ * Properti `id` adalah primary key yang otomatis dihasilkan saat penambahan data baru.
+ *
+ *  ID unik yang dihasilkan secara otomatis saat item ditambahkan
+ *  Nama item
+ *  Harga item
+ *  Jumlah atau stok item
  */
 @Entity(tableName = "items")
 data class Item(

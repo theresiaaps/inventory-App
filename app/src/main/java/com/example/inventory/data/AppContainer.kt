@@ -19,14 +19,16 @@ package com.example.inventory.data
 import android.content.Context
 
 /**
- * App container for Dependency injection.
+ * Antarmuka `AppContainer` yang menyediakan `ItemsRepository` untuk Dependency Injection,
+ * mempermudah pengelolaan ketergantungan dalam aplikasi.
  */
 interface AppContainer {
     val itemsRepository: ItemsRepository
 }
 
 /**
- * [AppContainer] implementation that provides instance of [OfflineItemsRepository]
+ * Implementasi `AppContainer` yang menyediakan instance `OfflineItemsRepository`,
+ * memungkinkan akses data dari database Room melalui `itemDao`.
  */
 class AppDataContainer(private val context: Context) : AppContainer {
     /**
